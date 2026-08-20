@@ -1,0 +1,2 @@
+best_epoch,box_loss,class_loss,dfl_loss,precision,recall,mAP50,mAP50_95,total_epochs
+202,1.56846,0.79016,1.02347,0.89592,0.91612,0.95514,0.52096,251
