@@ -110,7 +110,7 @@ The training dataset was manually annotated using CVAT (Computer Vision Annotati
 The resulting images and YOLO-format bounding-box annotations (.txt files) are included in the BrahmiGlyphData/ folder in this repository.
 
 The dataset can also be accessed through Kaggle:
-Kaggle Dataset: Kaggle link — coming soon
+Kaggle Dataset: https://www.kaggle.com/datasets/anusharawat/brahmi-manuscripts-glyph
 
  
 | Split | Images |
