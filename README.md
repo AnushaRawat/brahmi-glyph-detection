@@ -3,7 +3,7 @@
 Detection and extraction of individual Brahmi glyphs from historical manuscript images using YOLOv8.
 
 This repository implements the **detection stage** of a larger Brahmi OCR pipeline. A fine-tuned YOLOv8n model locates and crops individual glyphs from manuscript scans; the extracted images are then passed downstream to a CNN character classifier.
-
+ 
 ---
 
 ## Pipeline Overview
@@ -22,6 +22,9 @@ CNN Character Classification
         │
         ▼
 Brahmi Character Recognition
+        │
+        ▼
+Future Transliteration / Translation
 ```
 
 ---
@@ -37,7 +40,7 @@ Evaluated on a validation set of **3 manuscript images** containing **545 annota
 | mAP@50 | 95.51% |
 | mAP@50–95 | 52.10% |
 
-Training curves, PR curves, confusion matrix, and F1 plots are in [`results/`](results/). A CSV summary of all metrics is in [`training_summary.csv`](training_summary.csv).
+The complete epoch-by-epoch training results are available in trained_model/full_results.csvand the corresponding plots are available in trained_model/results.png
 
 ---
 
@@ -57,16 +60,11 @@ Training curves, PR curves, confusion matrix, and F1 plots are in [`results/`](r
 ├── model/
 │   └── yolov8n.pt            # base pretrained weights( not uploaded)
 │
-├── trained_model/
-│   └── best.pt               # fine-tuned weights (best epoch)
-│
-├── results/
-│   ├── results.png
-│   ├── confusion_matrix.png
-│   ├── PR_curve.png
-│   ├── P_curve.png
-│   ├── R_curve.png
-│   └── F1_curve.png
+├── trained_model/ 
+│   ├── args.yaml 
+│   ├── best.pt               # best epoch weights
+│   ├── full_results.csv 
+│   └── results.png
 │
 ├── training_summary.csv
 ├── yolo.ipynb
@@ -90,9 +88,40 @@ The dataset uses YOLO-format bounding-box annotations with a single class: `brah
 
 Place your data under `BrahmiGlyphData/` following the structure above, or update the paths in `data.yaml` to match your layout.
 
+The collected resources include:
+
+Brahmi manuscript images
+Individual Brahmi glyph images
+Corresponding glyph data used for preparing the object-detection dataset
+
+The individual glyph images are intended to support the next stage of the project: CNN-based character identification/classification after glyph detection.
+
+Please refer to the original source for the dataset and associated materials.
+
+### Dataset Annotation
+
+
+
+The manuscript images and individual Brahmi glyph resources used for this project were obtained from:
+Indoskript — http://indoskript.org
+
+The training dataset was manually annotated using CVAT (Computer Vision Annotation Tool). Each glyph was annotated with a bounding box corresponding to its location within the manuscript image.
+
+The resulting images and YOLO-format bounding-box annotations (.txt files) are included in the BrahmiGlyphData/ folder in this repository.
+
+The dataset can also be accessed through Kaggle:
+Kaggle Dataset: Kaggle link — coming soon
+
+ 
+| Split | Images |
+|---|---|
+| Training | 32 |
+| Validation | 3 |
+| **Total** | **35** |
+
 ### Running the Notebook
 
-Open [`yolo.ipynb`](yolo.ipynb) — it walks through the full workflow in order:
+Open [`yolo2.ipynb`](yolo2.ipynb) — it walks through the full workflow in order:
 
 1. Environment setup
 2. Dataset configuration
